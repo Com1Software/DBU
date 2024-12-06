@@ -28,14 +28,16 @@ func main() {
 		}
 		if string(char) == "1" {
 			fmt.Println("Load file")
-
-			fmt.Print("Enter a line of text: ")
-			text, _ := reader.ReadString('\n') // Read until newline character
-			// Remove trailing newline
-			text = text[:len(text)-1]
-
-			fmt.Println("You entered:", text)
+			fmt.Print("Enter name of the DBF file to load: ")
+			file, _ := reader.ReadString('\n')
+			file = file[:len(file)-2]
+			if _, err := os.Stat(file); err == nil {
+				fmt.Println("Loading:", file)
+			} else {
+				fmt.Println("File Not Found:", file)
+			}
 		}
+
 		// fmt.Printf("You pressed: rune %q, key %X\r\n", char, key)
 		if key == keyboard.KeyEsc {
 			break
